@@ -1,0 +1,3 @@
+rootProject.name='Bunny-Notifier'
+include ':app'
+include ':bunny-notifier'
