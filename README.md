@@ -2,7 +2,7 @@
 
 # Bunny-Notifier
 
-Simple notification wrapper class for grouping push and support remoteviews for android. 
+Simple notification wrapper class for grouping notification and support remoteviews for android. 
 1. It can support android project over API 16 (JellyBean)
 2. It can support notification grouping with using summary notification over API 24 (Nougat)
 3. It can support creating notification channel over API 26 (Oreo)
