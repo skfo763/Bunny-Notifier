@@ -1,7 +1,10 @@
 package com.skfo763.bunny_notifier.core
 
+import android.annotation.TargetApi
 import android.app.Notification
 import android.app.PendingIntent
+import androidx.annotation.ColorInt
+import androidx.core.app.NotificationCompat
 import com.skfo763.bunny_notifier.impls.BaseImpl
 import com.skfo763.bunny_notifier.impls.NotificationSettingsImpl
 import com.skfo763.bunny_notifier.model.BaseNotification
@@ -9,14 +12,22 @@ import com.skfo763.bunny_notifier.model.CustomNotification
 import com.skfo763.bunny_notifier.model.NotifierChannel
 
 class NotifierDataManager(
-    private val processor: NotificationSettings
+    private val notificationSettings: NotificationSettings
 ): BaseImpl, NotificationSettingsImpl {
     override fun setBase(baseData: BaseNotification): NotificationSettingsImpl {
-
+        notificationSettings.setBase(baseData)
+        return this
     }
 
     override fun setCustom(customNotification: CustomNotification): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+        notificationSettings.setBase(
+            BaseNotification(
+                customNotification.titleForSystem,
+                customNotification.textForSystem,
+                customNotification.smallIconForSystem)
+        )
+        notificationSettings.setCustom(customNotification.remoteViews)
+        return this
     }
 
     override fun setGroup(
@@ -24,43 +35,58 @@ class NotifierDataManager(
         groupId: String,
         groupChannel: NotifierChannel?
     ): NotificationSettingsImpl {
-        TODO("Not yet implemented")
-    }
-
-    override fun setGroupClickIntent(clickIntent: PendingIntent): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+        notificationSettings.setGroup(groupId, groupSmallIconResId)
+        groupChannel?.let { notificationSettings.setGroupChannel(it) }
+        return this
     }
 
     override fun setWhen(whenTimeMillis: Long): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+        notificationSettings.setWhen(whenTimeMillis)
+        return this
     }
 
     override fun setOnlyAlertOnce(isOnlyAlertOnce: Boolean): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+        notificationSettings.setOnlyAlertOnce(isOnlyAlertOnce)
+        return this
     }
 
     override fun setAutoCancel(autoCancel: Boolean): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+        notificationSettings.setAutoCancel(autoCancel)
+        return this
     }
 
     override fun setClickAction(clickAction: PendingIntent): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+        notificationSettings.setClickAction(clickAction)
+        return this
     }
 
-    override fun setColor(color: Int): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+    @TargetApi(21)
+    override fun setColor(@ColorInt color: Int): NotificationSettingsImpl {
+        notificationSettings.setColor(color)
+        return this
     }
 
+    override fun setGroupClickIntent(clickIntent: PendingIntent): NotificationSettingsImpl {
+        notificationSettings.setGroupClickIntent(clickIntent)
+        return this
+    }
+
+    @TargetApi(21)
     override fun setPublicVersion(notification: Notification): NotificationSettingsImpl {
-        TODO("Not yet implemented")
+        notificationSettings.setPublicVersion(notification)
+        return this
     }
 
-    override fun show(notificationId: Int) {
-        TODO("Not yet implemented")
+    override fun takeBuilder(): NotificationCompat.Builder {
+        return notificationSettings.takeBuilder()
     }
 
     override fun build(): Notification {
-        TODO("Not yet implemented")
+        return notificationSettings.build()
+    }
+
+    override fun show(notificationId: Int, notification: Notification?) {
+        notificationSettings.show(notificationId, notification)
     }
 
 }

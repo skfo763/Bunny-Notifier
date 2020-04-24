@@ -4,9 +4,10 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.skfo763.bunny_notifier.core.NotifierContextProcessor
+import com.skfo763.bunny_notifier.core.NotifierDataManager
 import com.skfo763.bunny_notifier.impls.BaseImpl
 import com.skfo763.bunny_notifier.model.NotifierChannel
-import java.lang.IllegalStateException
 
 class BunnyNotifier private constructor() {
 
@@ -44,14 +45,10 @@ class BunnyNotifier private constructor() {
      * initialize notification builder
      * @param context
      */
-    fun with(context: Context, channel: NotifierChannel? = null): BaseImpl {
+    fun with(context: Context, channel: NotifierChannel) : BaseImpl {
         if (Build.VERSION.SDK_INT >= 26) {
-            channel?.let {
-                registerChannel(context, it)
-            } ?: kotlin.run {
-                throw IllegalStateException("You should set notification channel over API 26 (Oreo)")
-            }
+            registerChannel(context, channel)
         }
-        return NotifierDataManager()
+        return NotifierDataManager(NotifierContextProcessor(context, channel))
     }
 }
