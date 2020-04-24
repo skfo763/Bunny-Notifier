@@ -2,7 +2,7 @@
 
 # Bunny-Notifier
 
-Simple notification wrapper class for grouping push and support remoteviews for android. 
+Simple notification wrapper class for grouping notification and support remoteviews for android. 
 1. It can support android project over API 16 (JellyBean)
 2. It can support notification grouping with using summary notification over API 24 (Nougat)
 3. It can support creating notification channel over API 26 (Oreo)
@@ -14,7 +14,7 @@ Simple notification wrapper class for grouping push and support remoteviews for 
 allprojects {
     repositories {
    		...
-   		url "http://dl.bintray.com/skfo763/Bunny-Notifier/"
+   		jcenter()
    	}
 }
 ~~~
@@ -122,14 +122,14 @@ private fun sendGroupNotification(id1: Int, id2: Int, groupId: String) {
   val channel = makeChannel(groupId)  
   val groupChannel = makeGroupChannel()  
   
-  Notifier.i.with(applicationContext, channel)  
+  BunnyNotifier.i.with(applicationContext, channel)  
 	 .setCustom(NotifierCustom("hello", "hello custom", R.mipmap.ic_launcher_round, makeRemoteView()))  
 	 .setClickAction(getPendingIntent())  
 	 .setGroup(3, R.mipmap.ic_launcher_round, groupId, groupChannel)  
 	 .setAutoCancel(true)  
 	 .show(id2)  
 
-  Notifier.i.with(applicationContext, channel)  
+  BunnyNotifier.i.with(applicationContext, channel)  
 	 .setBasic(NotifierCustom("hello2", "hello system 2", R.mipmap.ic_launcher_round)  
 	 .setClickAction(getPendingIntent())  
 	 .setGroup(3, R.mipmap.ic_launcher_round, groupId, groupChannel)  
@@ -144,7 +144,8 @@ Other Informations & functions are wroted at **NotificationSettingsImpl.kt**
 - Example
 ~~~kotlin
 /**  
- * Group Click Event - with PendingIntent * @param clickIntent : PendingIntent of click action  
+ * Group Click Event - with PendingIntent
+ * @param clickIntent : PendingIntent of click action  
  * @return The same Builder.  
  */@TargetApi(24)  
 fun setGroupClickIntent(clickIntent: PendingIntent): NotificationSettingsImpl
@@ -156,7 +157,7 @@ fun setGroupClickIntent(clickIntent: PendingIntent): NotificationSettingsImpl
 
 # license
 ~~~
-Copyright 2019 Changyeon-Seo
+Copyright 2020 Changyeon-Seo
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
