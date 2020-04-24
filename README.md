@@ -122,14 +122,14 @@ private fun sendGroupNotification(id1: Int, id2: Int, groupId: String) {
   val channel = makeChannel(groupId)  
   val groupChannel = makeGroupChannel()  
   
-  Notifier.i.with(applicationContext, channel)  
+  BunnyNotifier.i.with(applicationContext, channel)  
 	 .setCustom(NotifierCustom("hello", "hello custom", R.mipmap.ic_launcher_round, makeRemoteView()))  
 	 .setClickAction(getPendingIntent())  
 	 .setGroup(3, R.mipmap.ic_launcher_round, groupId, groupChannel)  
 	 .setAutoCancel(true)  
 	 .show(id2)  
 
-  Notifier.i.with(applicationContext, channel)  
+  BunnyNotifier.i.with(applicationContext, channel)  
 	 .setBasic(NotifierCustom("hello2", "hello system 2", R.mipmap.ic_launcher_round)  
 	 .setClickAction(getPendingIntent())  
 	 .setGroup(3, R.mipmap.ic_launcher_round, groupId, groupChannel)  
