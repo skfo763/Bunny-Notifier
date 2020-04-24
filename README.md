@@ -144,7 +144,8 @@ Other Informations & functions are wroted at **NotificationSettingsImpl.kt**
 - Example
 ~~~kotlin
 /**  
- * Group Click Event - with PendingIntent * @param clickIntent : PendingIntent of click action  
+ * Group Click Event - with PendingIntent
+ * @param clickIntent : PendingIntent of click action  
  * @return The same Builder.  
  */@TargetApi(24)  
 fun setGroupClickIntent(clickIntent: PendingIntent): NotificationSettingsImpl
