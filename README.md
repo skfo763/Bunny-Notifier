@@ -14,7 +14,7 @@ Simple notification wrapper class for grouping push and support remoteviews for 
 allprojects {
     repositories {
    		...
-   		url "http://dl.bintray.com/skfo763/Bunny-Notifier/"
+   		jcenter()
    	}
 }
 ~~~
@@ -157,7 +157,7 @@ fun setGroupClickIntent(clickIntent: PendingIntent): NotificationSettingsImpl
 
 # license
 ~~~
-Copyright 2019 Changyeon-Seo
+Copyright 2020 Changyeon-Seo
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
