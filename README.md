@@ -1,4 +1,4 @@
-![thumbnail_image](./bunny_icon.png)
+![thumbnail_image](./git-resources/bunny_icon.png)
 
 # Bunny-Notifier
 
