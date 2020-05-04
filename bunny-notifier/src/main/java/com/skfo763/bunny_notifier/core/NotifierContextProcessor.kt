@@ -97,6 +97,10 @@ open class NotifierContextProcessor (
         }
     }
 
+    override fun setStyle(style: NotificationCompat.Style) {
+        builder.setStyle(style)
+    }
+
     override fun takeBuilder(): NotificationCompat.Builder {
         return builder
     }
@@ -117,7 +121,7 @@ open class NotifierContextProcessor (
         }
     }
 
-    fun showGroupNotification(groupNotification: GroupNotification) {
+    private fun showGroupNotification(groupNotification: GroupNotification) {
         val builder = if(Build.VERSION.SDK_INT >= 26) {
             NotificationCompat.Builder(context, channel.channelId).also {
                 setChannelDataForCompat(builder, groupNotification.groupChannel)
@@ -128,8 +132,12 @@ open class NotifierContextProcessor (
         groupNotification.groupClickIntent?.let { builder.setContentIntent(it) }
         builder.setGroup(groupNotification.groupId)
         builder.setGroupSummary(true)
+        builder.setAutoCancel(true)
 
-        manager.notify(groupNotification.groupId.hashCode(), build(builder))
+        manager.notify(
+            groupNotification.groupId.hashCode(),
+            build(builder).also { it.flags = Notification.FLAG_AUTO_CANCEL }
+        )
     }
 
     private fun setChannelDataForCompat(builder: NotificationCompat.Builder, channel: NotifierChannel) {

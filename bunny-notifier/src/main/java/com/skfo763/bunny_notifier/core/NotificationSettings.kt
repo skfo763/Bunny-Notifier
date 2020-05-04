@@ -43,6 +43,8 @@ abstract class NotificationSettings(
     @TargetApi(21)
     abstract fun setPublicVersion(notification: Notification)
 
+    abstract fun setStyle(style: NotificationCompat.Style)
+
     private fun makeNotificationBuilder(context: Context, channel: NotifierChannel) =
         if (Build.VERSION.SDK_INT >= 26) {
             NotificationCompat.Builder(context, channel.channelId)

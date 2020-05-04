@@ -77,6 +77,11 @@ class NotifierDataManager(
         return this
     }
 
+    override fun setStyle(style: NotificationCompat.Style): NotificationSettingsImpl {
+        notificationSettings.setStyle(style)
+        return this
+    }
+
     override fun takeBuilder(): NotificationCompat.Builder {
         return notificationSettings.takeBuilder()
     }

@@ -5,6 +5,7 @@ import android.app.Notification
 import android.app.PendingIntent
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import androidx.core.app.NotificationCompat
 import com.skfo763.bunny_notifier.model.NotifierChannel
 
 interface NotificationSettingsImpl: ShowImpl, BuildImpl {
@@ -81,11 +82,17 @@ interface NotificationSettingsImpl: ShowImpl, BuildImpl {
 
     /**
      * Supply a replacement Notification whose contents should be shown in insecure contexts
-     *
      * @param notification A replacement notification, presumably with some or all info redacted.
      * @return The same Builder.
      */
     @TargetApi(21)
     fun setPublicVersion(notification: Notification): NotificationSettingsImpl
+
+    /**
+     * Set Notification Style for BigText and others
+     * @param style Notification style: ex) NotificationCompat.BigTextStyle()
+     * @return The same Builder.
+     */
+    fun setStyle(style: NotificationCompat.Style): NotificationSettingsImpl
 
 }
